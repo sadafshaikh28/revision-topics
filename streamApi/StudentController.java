@@ -1,7 +1,9 @@
 package streamApi;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class StudentController {
@@ -28,6 +30,36 @@ public class StudentController {
 		}
 		
 		// l1.stream().forEach(System.out::println);
+		System.out.println();
+		
+		
+		
+		
+		
+		System.out.println("********************************RANK(SORTED) ******************************************************\n\n");
+		//sorted()
+		List<Student> rankList = l1.stream().sorted(Comparator.comparingDouble(Student :: getMarks).reversed()).collect(Collectors.toList());
+		for(Student e: rankList)
+		{
+			System.out.println("id: "+ e.id + "		name: "+ e.name + "		course: "+ e.course +"		marks: "+ e.marks);
+		}
+		System.out.println();
+		
+		
+		
+		
+		
+		System.out.println("******************************** GROUPING ******************************************************\n\n");
+		
+		Map <String ,List<Student>> groupedMap = l1.stream().collect(Collectors.groupingBy(student -> student.getCourse()));
+		
+		//System.out.println(groupedMap); 								- printed in single line using toString method of Student class
+		
+		//System.out.println();
+		
+		groupedMap.forEach((k,v) -> System.out.println("Course = "
+                + k + ", Students = " + v  +"\n"));	
+		
 		System.out.println();
 		
 		//filter out students whose course is math						// s is just an object
